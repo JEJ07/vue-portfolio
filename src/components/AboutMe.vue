@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import aboutImg from '@/assets/images/about.jpg'
 
 // About section data obj
 const aboutData = {
@@ -8,7 +9,7 @@ const aboutData = {
     title: 'ABOUT',
   },
   image: {
-    src: '/src/assets/images/about.jpg',
+    src: aboutImg,
     alt: 'Profile',
   },
   heading: {

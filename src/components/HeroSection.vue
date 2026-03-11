@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-
+import profileImg from '@/assets/images/profile.jpg'
 // Hero data object para icall nlng
 const heroData = {
   label: 'PORTFOLIO / 2026',
@@ -11,7 +11,7 @@ const heroData = {
   description:
     'Software developer crafting clean, purposeful digital experiences with modern web technologies.',
   image: {
-    src: '/src/assets/images/profile.jpg',
+    src: profileImg,
     alt: 'John Emman Juaquera',
   },
   buttons: [
