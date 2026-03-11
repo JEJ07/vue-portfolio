@@ -1,6 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
+// Import images at the top
+import reviewaiImg from '@/assets/images/projs/reviewai.jpg'
+import crimsonfindImg from '@/assets/images/projs/crimsonfind.jpg'
+
 const projects = [
   {
     id: 1,
@@ -11,7 +15,7 @@ const projects = [
     technologies: ['Python', 'Django', 'MYSQL'],
     color: 'terracotta',
     codeUrl: 'https://github.com/JEJ07/2025-CP_ReviewAI',
-    image: "/src/assets/images/projs/reviewai.jpg",
+    image: reviewaiImg, 
   },
   {
     id: 2,
@@ -31,7 +35,7 @@ const projects = [
     technologies: ['Python', 'KivyMD', 'MySQL'],
     color: 'navy',
     codeUrl: 'https://github.com/JEJ07/CrimsonFindsApp',
-    image: "/src/assets/images/projs/crimsonfind.jpg",
+    image: crimsonfindImg,
   },
   {
     id: 4,
@@ -48,8 +52,10 @@ const projects = [
 const sectionRef = ref(null)
 const isVisible = ref(false)
 
-const handleImageError = (event) => {
+const handleImageError = (event, project) => {
+  console.log(`Image failed to load for project ${project.id}`)
   event.target.style.display = 'none'
+  project.image = null
 }
 
 onMounted(() => {
@@ -91,10 +97,7 @@ onMounted(() => {
           <!-- Project Image/Visual -->
           <div
             class="relative transition-all duration-700"
-            :class="[
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
-              index % 2 === 1 ? 'lg:col-start-2' : '',
-            ]"
+            :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
             :style="{ transitionDelay: `${index * 0.2}s` }"
           >
             <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream-200 shadow-lg">
@@ -103,8 +106,9 @@ onMounted(() => {
                 v-if="project.image"
                 :src="project.image"
                 :alt="project.title"
-                @error="handleImageError"
+                @error="(event) => handleImageError(event, project)"
                 class="w-full h-full object-cover"
+                @load="() => console.log(`Image loaded successfully: ${project.image}`)"
               />
 
               <!-- Placeholder when no image -->
@@ -155,10 +159,7 @@ onMounted(() => {
           <!-- Project Content -->
           <div
             class="transition-all duration-700 space-y-6"
-            :class="[
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
-              index % 2 === 1 ? 'lg:col-start-1' : '',
-            ]"
+            :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
             :style="{ transitionDelay: `${index * 0.2 + 0.1}s` }"
           >
             <!-- Project Title -->
