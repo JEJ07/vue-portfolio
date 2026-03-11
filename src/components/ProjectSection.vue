@@ -2,8 +2,8 @@
 import { ref, onMounted } from 'vue'
 
 // Import images at the top
-import reviewaiImg from '@/assets/images/projs/reviewai.jpg'
-import crimsonfindImg from '@/assets/images/projs/crimsonfind.jpg'
+import reviewaiImg from '/images/projs/reviewai.jpg'
+import crimsonfindImg from '/images/projs/crimsonfind.jpg'
 
 const projects = [
   {
@@ -15,7 +15,7 @@ const projects = [
     technologies: ['Python', 'Django', 'MYSQL'],
     color: 'terracotta',
     codeUrl: 'https://github.com/JEJ07/2025-CP_ReviewAI',
-    image: reviewaiImg, 
+    image: reviewaiImg,
   },
   {
     id: 2,
