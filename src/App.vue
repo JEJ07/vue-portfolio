@@ -1,7 +1,10 @@
+<script setup>
+import NavBar from "./components/NavBar.vue"
+</script>
+
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <h1 class="text-4xl font-bold text-blue-600">
-      Vue Test Page test test blabla
-    </h1>
-  </div>
+  <NavBar />
+  <main class="pt-20">
+    <router-view />
+  </main>
 </template>
