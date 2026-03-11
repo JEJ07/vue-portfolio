@@ -40,7 +40,6 @@ const scrollTo = (id) => {
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        
         <!-- Left Column - Text Content -->
         <div class="order-2 lg:order-1">
           <!-- Portfolio Label -->
@@ -84,7 +83,7 @@ const scrollTo = (id) => {
           >
             <button
               @click="scrollTo('#projects')"
-              class="px-8 py-4 bg-navy-900 text-white rounded-lg font-medium hover:bg-navy-800 transition-colors duration-300 flex items-center justify-center gap-2"
+              class="px-8 py-4 bg-navy-900 text-white rounded-lg font-medium hover:bg-navy-800 hover:cursor-pointer transition-colors duration-300 flex items-center justify-center gap-2"
             >
               View Projects
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +98,7 @@ const scrollTo = (id) => {
 
             <button
               @click="scrollTo('#contact')"
-              class="px-8 py-4 border-2 border-navy-300 text-navy-700 rounded-lg font-medium hover:bg-navy-900 hover:text-white hover:border-navy-900 transition-all duration-300"
+              class="px-8 py-4 border-2 border-navy-300 hover:cursor-pointer text-navy-700 rounded-lg font-medium hover:bg-navy-900 hover:text-white hover:border-navy-900 transition-all duration-300"
             >
               Contact Me
             </button>
@@ -107,10 +106,10 @@ const scrollTo = (id) => {
         </div>
 
         <!-- Right Column - Profile Image -->
-        <div 
+        <div
           :class="[
             'order-1 lg:order-2 flex justify-center lg:justify-end transition-all duration-1000 delay-300',
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
           ]"
         >
           <div class="relative">
@@ -121,18 +120,25 @@ const scrollTo = (id) => {
                 alt="John Emman Juaquera"
                 class="w-full h-full object-cover rounded-2xl shadow-2xl"
               />
-              
+
               <!-- Decorative border -->
-              <div class="absolute -inset-4 bg-gradient-to-br from-terracotta-200 to-sage-200 rounded-2xl -z-10 opacity-50"></div>
+              <div
+                class="absolute -inset-4 bg-gradient-to-br from-terracotta-200 to-sage-200 rounded-2xl -z-10 opacity-50"
+              ></div>
             </div>
 
             <!-- Floating decorative elements -->
-            <div class="absolute -top-6 -right-6 w-12 h-12 bg-terracotta-400 rounded-full animate-float opacity-80"></div>
-            <div class="absolute -bottom-4 -left-4 w-8 h-8 bg-sage-400 rounded-full animate-float animation-delay-1000 opacity-70"></div>
-            <div class="absolute top-1/2 -left-8 w-6 h-6 bg-sand-400 rounded-full animate-float animation-delay-500 opacity-60"></div>
+            <div
+              class="absolute -top-6 -right-6 w-12 h-12 bg-terracotta-400 rounded-full animate-float opacity-80"
+            ></div>
+            <div
+              class="absolute -bottom-4 -left-4 w-8 h-8 bg-sage-400 rounded-full animate-float animation-delay-1000 opacity-70"
+            ></div>
+            <div
+              class="absolute top-1/2 -left-8 w-6 h-6 bg-sand-400 rounded-full animate-float animation-delay-500 opacity-60"
+            ></div>
           </div>
         </div>
-
       </div>
     </div>
 

@@ -57,26 +57,19 @@ const scrollToTop = () => {
             v-for="item in navItems"
             :key="item.to"
             @click="scrollTo(item.to)"
-            class="font-medium text-navy-700 hover:text-terracotta-500 transition-colors duration-300 relative group"
+            class="font-medium text-navy-700 hover:text-terracotta-500 transition-colors duration-300 relative group cursor-pointer"
           >
             {{ item.label }}
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-terracotta-500 transition-all duration-300 group-hover:w-full"></span>
           </button>
         </div>
 
-        <!-- Resume btn -->
-        <div class="hidden md:block">
-          <button
-            class="px-6 py-2 bg-terracotta-500 text-white rounded-lg hover:bg-terracotta-600 transition-all duration-300 font-medium shadow-sm hover:shadow-md"
-          >
-            Resume
-          </button>
-        </div>
+        
 
         <!-- Mobile btn-->
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="md:hidden text-navy-700 hover:text-terracotta-500 transition-colors duration-300"
+          class="md:hidden text-navy-700 hover:text-terracotta-500 transition-colors duration-300 cursor-pointer"
         >
           <Menu v-if="!mobileMenuOpen" size="24" />
           <X v-else size="24" />
@@ -93,13 +86,13 @@ const scrollToTop = () => {
             v-for="item in navItems"
             :key="item.to"
             @click="scrollTo(item.to)"
-            class="text-left py-2 text-navy-700 hover:text-terracotta-500 transition-colors duration-300 font-medium"
+            class="text-left py-2 text-navy-700 hover:text-terracotta-500 transition-colors duration-300 font-medium cursor-pointer"
           >
             {{ item.label }}
           </button>
 
           <button
-            class="px-6 py-3 bg-terracotta-500 text-white rounded-lg hover:bg-terracotta-600 transition-all duration-300 font-medium text-left"
+            class="px-6 py-3 bg-terracotta-500 text-white rounded-lg hover:bg-terracotta-600 transition-all duration-300 font-medium text-left cursor-pointer"
           >
             Resume
           </button>
