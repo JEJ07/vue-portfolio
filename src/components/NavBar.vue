@@ -25,6 +25,10 @@ const scrollTo = (id) => {
     element.scrollIntoView({ behavior: "smooth" })
   }
 }
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+}
 </script>
 
 <template>
@@ -33,19 +37,19 @@ const scrollTo = (id) => {
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       isScrolled
         ? 'bg-cream-50/95 backdrop-blur-md shadow-sm border-b border-cream-200'
-        : 'bg-transparent'
+        : 'bg-cream-50/80 backdrop-blur-sm'
     ]"
   >
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
 
         <!-- Logo -->
-        <RouterLink 
-          to="/" 
-          class="text-xl font-heading font-bold text-navy-900 hover:text-terracotta-500 transition-colors duration-300"
+        <button
+          @click="scrollToTop"
+          class="text-xl font-heading font-bold text-navy-900 hover:text-terracotta-500 transition-colors duration-300 cursor-pointer"
         >
           JE.
-        </RouterLink>
+        </button>
 
         <!-- Desktop Nav -->
         <div class="hidden md:flex gap-8">
@@ -80,8 +84,8 @@ const scrollTo = (id) => {
       </div>
 
       <!-- Mobile Menu -->
-      <div 
-        v-if="mobileMenuOpen" 
+      <div
+        v-if="mobileMenuOpen"
         class="md:hidden py-4 border-t border-cream-200 bg-cream-50/95 backdrop-blur-md"
       >
         <div class="flex flex-col gap-4">
