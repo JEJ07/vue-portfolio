@@ -1,6 +1,40 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
+// About section data obj
+const aboutData = {
+  section: {
+    number: '01',
+    title: 'ABOUT',
+  },
+  image: {
+    src: '/src/assets/images/about.jpg',
+    alt: 'Profile',
+  },
+  heading: {
+    prefix: 'I build digital products at the intersection of ',
+    highlights: [
+      { text: 'design', color: 'terracotta' },
+      { text: 'engineering', color: 'sage' },
+    ],
+    suffix: ', where craft meets utility.',
+  },
+  description: [
+    'An aspiring web developer with a passion for clean, optimized web applications. Every line of code should serve a purpose, every interaction should feel natural.',
+    "When I'm not coding, I explore new technologies, watch anime, play video games, and refine my understanding of user-centered design.",
+  ],
+  stats: [
+    {
+      number: '3+',
+      label: 'Years Experience',
+    },
+    {
+      number: '10+',
+      label: 'Projects Built',
+    },
+  ],
+}
+
 const sectionRef = ref(null)
 const isVisible = ref(false)
 
@@ -26,9 +60,13 @@ onMounted(() => {
       <!-- Section number and title -->
       <div class="mb-16">
         <div class="flex items-center gap-8 mb-8">
-          <span class="text-terracotta-500 text-sm font-medium">01</span>
-          <div class="h-px  bg-cream-300 flex-1"></div>
-          <span class="text-navy-400 text-sm font-medium tracking-widest">ABOUT</span>
+          <span class="text-terracotta-500 text-sm font-medium">{{
+            aboutData.section.number
+          }}</span>
+          <div class="h-px bg-cream-300 flex-1"></div>
+          <span class="text-navy-400 text-sm font-medium tracking-widest">{{
+            aboutData.section.title
+          }}</span>
         </div>
       </div>
 
@@ -38,12 +76,12 @@ onMounted(() => {
           class="transition-all duration-700"
           :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
         >
-          <!-- img prof -->
+          <!-- Profile Image -->
           <div class="mb-12">
             <div class="w-76 h-88 bg-cream-200 rounded-lg overflow-hidden">
               <img
-                src="/src/assets/images/about.jpg"
-                alt="Profile"
+                :src="aboutData.image.src"
+                :alt="aboutData.image.alt"
                 class="w-full h-full object-cover"
               />
             </div>
@@ -51,11 +89,19 @@ onMounted(() => {
 
           <!-- Main heading -->
           <h2 class="text-4xl lg:text-5xl font-heading font-medium leading-tight mb-8">
-            <span class="text-navy-900">I build digital products at the intersection of </span>
-            <span class="text-terracotta-500">design</span>
-            <span class="text-navy-900"> and </span>
-            <span class="text-sage-500">engineering</span>
-            <span class="text-navy-900">, where craft meets utility.</span>
+            <span class="text-navy-900">{{ aboutData.heading.prefix }}</span>
+            <template v-for="(highlight, index) in aboutData.heading.highlights" :key="index">
+              <span
+                :class="{
+                  'text-terracotta-500': highlight.color === 'terracotta',
+                  'text-sage-500': highlight.color === 'sage',
+                }"
+              >
+                {{ highlight.text }}
+              </span>
+              <span v-if="index === 0" class="text-navy-900"> and </span>
+            </template>
+            <span class="text-navy-900">{{ aboutData.heading.suffix }}</span>
           </h2>
         </div>
 
@@ -66,25 +112,18 @@ onMounted(() => {
         >
           <!-- Description paragraphs -->
           <div class="space-y-6 text-navy-600 text-lg leading-relaxed">
-            <p>
-              An aspiring web developer with a passion for clean, optimized web applications. Every line
-              of code should serve a purpose, every interaction should feel natural.
-            </p>
-            <p>
-              When I'm not coding, I explore new technologies, watch anime, play video games, and refine
-              my understanding of user-centered design.
+            <p v-for="(paragraph, index) in aboutData.description" :key="index">
+              {{ paragraph }}
             </p>
           </div>
 
           <!-- Stats -->
           <div class="flex gap-16 pt-8">
-            <div>
-              <div class="text-3xl font-heading font-bold text-navy-900 mb-1">3+</div>
-              <div class="text-navy-500 text-sm uppercase tracking-wider">Years Experience</div>
-            </div>
-            <div>
-              <div class="text-3xl font-heading font-bold text-navy-900 mb-1">10+</div>
-              <div class="text-navy-500 text-sm uppercase tracking-wider">Projects Built</div>
+            <div v-for="(stat, index) in aboutData.stats" :key="index">
+              <div class="text-3xl font-heading font-bold text-navy-900 mb-1">
+                {{ stat.number }}
+              </div>
+              <div class="text-navy-500 text-sm uppercase tracking-wider">{{ stat.label }}</div>
             </div>
           </div>
         </div>

@@ -60,7 +60,7 @@ const infiniteSkills = [
   'WORDPRESS',
   'FIGMA',
   'HTML',
-  'CSS'
+  'CSS',
 ]
 
 const sectionRef = ref(null)

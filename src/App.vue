@@ -1,5 +1,11 @@
 <script setup>
-import NavBar from "./components/NavBar.vue"
+import { onMounted } from 'vue'
+import NavBar from './components/NavBar.vue'
+
+
+onMounted(() => {
+  document.title = 'John Emman Juaquera - Portfolio'
+})
 </script>
 
 <template>

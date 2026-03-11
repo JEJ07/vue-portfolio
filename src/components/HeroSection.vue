@@ -1,6 +1,33 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
+// Hero data object para icall nlng
+const heroData = {
+  label: 'PORTFOLIO / 2026',
+  name: {
+    first: 'John Emman',
+    last: 'Juaquera',
+  },
+  description:
+    'Software developer crafting clean, purposeful digital experiences with modern web technologies.',
+  image: {
+    src: '/src/assets/images/profile.jpg',
+    alt: 'John Emman Juaquera',
+  },
+  buttons: [
+    {
+      text: 'View Projects',
+      type: 'primary',
+      target: '#projects',
+    },
+    {
+      text: 'Contact Me',
+      type: 'secondary',
+      target: '#contact',
+    },
+  ],
+}
+
 const heroRef = ref(null)
 const isVisible = ref(false)
 
@@ -33,7 +60,6 @@ const scrollTo = (id) => {
   >
     <!-- Background Decorative Shapes -->
     <div class="absolute right-0 top-1/2 transform -translate-y-1/2 opacity-20">
-      <!-- Subtle background shapes for visual interest -->
       <div class="w-96 h-32 bg-sage-200 absolute right-32 bottom-16 rounded-lg"></div>
       <div class="w-48 h-48 bg-terracotta-200 rounded-full absolute right-10 top-10"></div>
     </div>
@@ -49,7 +75,7 @@ const scrollTo = (id) => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
             ]"
           >
-            PORTFOLIO / 2026
+            {{ heroData.label }}
           </div>
 
           <!-- Main Title -->
@@ -59,8 +85,8 @@ const scrollTo = (id) => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
             ]"
           >
-            <span class="text-navy-900 block">John Emman</span>
-            <span class="text-terracotta-500 block">Juaquera</span>
+            <span class="text-navy-900 block">{{ heroData.name.first }}</span>
+            <span class="text-terracotta-500 block">{{ heroData.name.last }}</span>
           </h1>
 
           <!-- Description -->
@@ -70,8 +96,7 @@ const scrollTo = (id) => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
             ]"
           >
-            Software developer crafting clean, purposeful digital experiences with modern web
-            technologies.
+            {{ heroData.description }}
           </p>
 
           <!-- CTA Buttons -->
@@ -82,11 +107,24 @@ const scrollTo = (id) => {
             ]"
           >
             <button
-              @click="scrollTo('#projects')"
-              class="px-8 py-4 bg-navy-900 text-white rounded-lg font-medium hover:bg-navy-800 hover:cursor-pointer transition-colors duration-300 flex items-center justify-center gap-2"
+              v-for="(button, index) in heroData.buttons"
+              :key="index"
+              @click="scrollTo(button.target)"
+              :class="[
+                'px-8 py-4 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer',
+                button.type === 'primary'
+                  ? 'bg-navy-900 text-white hover:bg-navy-800'
+                  : 'border-2 border-navy-300 text-navy-700 hover:bg-navy-900 hover:text-white hover:border-navy-900',
+              ]"
             >
-              View Projects
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {{ button.text }}
+              <svg
+                v-if="button.type === 'primary'"
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -94,13 +132,6 @@ const scrollTo = (id) => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 ></path>
               </svg>
-            </button>
-
-            <button
-              @click="scrollTo('#contact')"
-              class="px-8 py-4 border-2 border-navy-300 hover:cursor-pointer text-navy-700 rounded-lg font-medium hover:bg-navy-900 hover:text-white hover:border-navy-900 transition-all duration-300"
-            >
-              Contact Me
             </button>
           </div>
         </div>
@@ -116,8 +147,8 @@ const scrollTo = (id) => {
             <!-- Main profile image -->
             <div class="relative w-80 h-80 lg:w-96 lg:h-96">
               <img
-                src="/src/assets/images/profile.jpg"
-                alt="John Emman Juaquera"
+                :src="heroData.image.src"
+                :alt="heroData.image.alt"
                 class="w-full h-full object-cover rounded-2xl shadow-2xl"
               />
 

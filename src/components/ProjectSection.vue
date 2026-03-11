@@ -31,7 +31,7 @@ const projects = [
     technologies: ['Python', 'KivyMD', 'MySQL'],
     color: 'navy',
     codeUrl: 'https://github.com/JEJ07/CrimsonFindsApp',
-    image: null,
+    image: "/src/assets/images/projs/crimsonfind.jpg",
   },
   {
     id: 4,
