@@ -1,33 +1,71 @@
 <script setup>
-import { ref, onMounted } from "vue"
-import { Menu, X } from "lucide-vue-next"
+import { ref, onMounted, onUnmounted } from 'vue'
+import { Menu, X } from 'lucide-vue-next'
 
 const navItems = [
-  { label: "About", to: "#about" },
-  { label: "Skills", to: "#skills" },
-  { label: "Projects", to: "#projects" },
-  { label: "Contact", to: "#contact" }
+  { label: 'About', to: '#about' },
+  { label: 'Skills', to: '#skills' },
+  { label: 'Projects', to: '#projects' },
+  { label: 'Contact', to: '#contact' },
 ]
 
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
+const activeSection = ref('')
+
+const updateActiveSection = () => {
+  const sections = ['about', 'skills', 'projects', 'contact']
+  const scrollPosition = window.scrollY + 100 // Offset for navbar height
+
+  // Check if we're at the top of the page
+  if (scrollPosition < 200) {
+    activeSection.value = ''
+    return
+  }
+
+  // Find which section is currently in view
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const element = document.getElementById(sections[i])
+    if (element) {
+      const rect = element.getBoundingClientRect()
+      const elementTop = window.scrollY + rect.top
+
+      if (scrollPosition >= elementTop - 200) {
+        activeSection.value = `#${sections[i]}`
+        break
+      }
+    }
+  }
+}
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 50
+  updateActiveSection()
+}
 
 onMounted(() => {
-  window.addEventListener("scroll", () => {
-    isScrolled.value = window.scrollY > 50
-  })
+  window.addEventListener('scroll', handleScroll)
+  updateActiveSection() // Initial check
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 
 const scrollTo = (id) => {
   mobileMenuOpen.value = false
   const element = document.querySelector(id)
   if (element) {
-    element.scrollIntoView({ behavior: "smooth" })
+    element.scrollIntoView({ behavior: 'smooth' })
   }
 }
 
 const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" })
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const isActive = (to) => {
+  return activeSection.value === to
 }
 </script>
 
@@ -37,12 +75,11 @@ const scrollToTop = () => {
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       isScrolled
         ? 'bg-cream-50/95 backdrop-blur-md shadow-sm border-b border-cream-200'
-        : 'bg-cream-50/80 backdrop-blur-sm'
+        : 'bg-cream-50/80 backdrop-blur-sm',
     ]"
   >
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
-
         <!-- Logo -->
         <button
           @click="scrollToTop"
@@ -57,14 +94,27 @@ const scrollToTop = () => {
             v-for="item in navItems"
             :key="item.to"
             @click="scrollTo(item.to)"
-            class="font-medium text-navy-700 hover:text-terracotta-500 transition-colors duration-300 relative group cursor-pointer"
+            class="font-medium transition-colors duration-300 relative group cursor-pointer"
+            :class="
+              isActive(item.to) ? 'text-terracotta-500' : 'text-navy-700 hover:text-terracotta-500'
+            "
           >
             {{ item.label }}
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-terracotta-500 transition-all duration-300 group-hover:w-full"></span>
+            <span
+              class="absolute -bottom-1 left-0 h-0.5 bg-terracotta-500 transition-all duration-300"
+              :class="isActive(item.to) ? 'w-full' : 'w-0 group-hover:w-full'"
+            ></span>
           </button>
         </div>
 
-        
+        <!-- Resume Button (Desktop) -->
+        <!-- <div class="hidden md:block">
+          <button
+            class="px-6 py-2 bg-terracotta-500 text-white rounded-lg hover:bg-terracotta-600 transition-all duration-300 font-medium shadow-sm hover:shadow-md cursor-pointer"
+          >
+            Resume
+          </button>
+        </div> -->
 
         <!-- Mobile btn-->
         <button
@@ -86,7 +136,10 @@ const scrollToTop = () => {
             v-for="item in navItems"
             :key="item.to"
             @click="scrollTo(item.to)"
-            class="text-left py-2 text-navy-700 hover:text-terracotta-500 transition-colors duration-300 font-medium cursor-pointer"
+            class="text-left py-2 transition-colors duration-300 font-medium cursor-pointer"
+            :class="
+              isActive(item.to) ? 'text-terracotta-500' : 'text-navy-700 hover:text-terracotta-500'
+            "
           >
             {{ item.label }}
           </button>

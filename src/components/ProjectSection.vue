@@ -18,7 +18,7 @@ const projects = [
     title: 'SaasCaterPro: Catering Management System',
     description:
       'A catering management system that handles online orders, menu management, and customer feedback.',
-    technologies: ['PHP', 'LARAVEL'],
+    technologies: ['PHP', 'LARAVEL', 'MYSQL'],
     color: 'sage',
     codeUrl: 'https://github.com/Heavenly-Potato-Cult/SaasCaterPro',
     image: null,
@@ -41,7 +41,7 @@ const projects = [
     technologies: ['PHP', 'LARAVEL', 'MYSQL'],
     color: 'navy',
     codeUrl: 'https://github.com/JEJ07/portfolioproj',
-    image: null, 
+    image: null,
   },
 ]
 
